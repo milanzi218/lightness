@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fce4ec; /* Pale pink background */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        h2 {
+            color: #c2185b; /* Dark pink heading */
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            color: #c2185b;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #c2185b; /* Soft pink button */
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #ad1457;
+        }
+
+        .social-icons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 24px;
+            color: #c2185b;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ad1457;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 20px;
+            color: #c2185b;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Contact Us</h2>
+        <p>If you have any questions, feel free to reach out!</p>
+
+        <form id="contactForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+            <span class="error" id="nameError"></span>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error" id="emailError"></span>
+
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <span class="error" id="messageError"></span>
+
+            <button type="submit">Send Message</button>
+            <p id="formSuccess" class="success"></p>
+        </form>
+
+        <div class="contact-info">
+            <p><strong>📍 Address:</strong> 123, Dar es Salaam, Tanzania</p>
+            <p><strong>✉️ Email:</strong> contact@yourwebsite.com</p>
+            <p><strong>📞 Phone:</strong> +255 123 456 789</p>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#contactForm").submit(function (event) {
+                event.preventDefault();
+                let valid = true;
+
+                // Validate Full Name
+                let name = $("#name").val().trim();
+                if (name.length < 3) {
+                    $("#nameError").text("Full Name must be at least 3 characters long.");
+                    valid = false;
+                } else {
+                    $("#nameError").text("");
+                }
+
+                // Validate Email
+                let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                let email = $("#email").val().trim();
+                if (!emailPattern.test(email)) {
+                    $("#emailError").text("Invalid email format.");
+                    valid = false;
+                } else {
+                    $("#emailError").text("");
+                }
+
+                // Validate Message
+                let message = $("#message").val().trim();
+                if (message.length < 5) {
+                    $("#messageError").text("Message must be at least 5 characters long.");
+                    valid = false;
+                } else {
+                    $("#messageError").text("");
+                }
+
+                if (valid) {
+                    $("#formSuccess").text("Message sent successfully!");
+                    setTimeout(() => {
+                        $("#formSuccess").text("");
+                        $("#contactForm")[0].reset();
+                    }, 3000);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
